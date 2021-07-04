@@ -11,6 +11,7 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - ECR_REPOSITORY_URI=829383579366.dkr.ecr.us-east-2.amazonaws.com/sample
   build:
     commands:
       - echo Build started on `date`
