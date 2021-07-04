@@ -6,9 +6,11 @@ phases:
       docker: 18
   pre_build:
     commands:
+      - echo Logging in to Dockerhub
+      - docker login -u sushmaappidi -p fea326f2-2417-40e5-87c5-5dd1cca26d06
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - $(aws ecr get-login --region us-east-2 --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       - ECR_REPOSITORY_URI=829383579366.dkr.ecr.us-east-2.amazonaws.com/sample
